@@ -28,7 +28,7 @@ class Catapult {
   void mouseDraggedEvent(PVector mouse, Balls balls) {
     /*
       Spawn the ball on the catapults
-    */
+     */
 
     if (release) {
       if (PVector.dist(mouse, spawPos) <= 40) {
@@ -42,7 +42,7 @@ class Catapult {
   void mouseReleasedEvent(PVector mouse, Balls balls) {
     /*
       Release and shoot the ball
-    */
+     */
 
     PVector force   = PVector.sub(mouse, spawPos).div(-5);
 

@@ -1,5 +1,6 @@
 // Program for end assignment for Algorithm Course
 // Written by Tran Quy An.
+
 Ground   ground;
 Walls    walls;
 Balls    balls;
@@ -7,12 +8,11 @@ Catapult catapult;
 
 
 void setup() {
-  last_time = System.nanoTime();
-  
-  size(2000,2000);
+  size(700, 700);
   noStroke();
   ellipseMode(RADIUS);
   rectMode   (RADIUS);
+  last_time   = System.nanoTime();
   ground      = new Ground();
   walls       = new Walls();
   balls       = new Balls();
@@ -21,11 +21,6 @@ void setup() {
 
 
 void draw() {
-  // Calculate delta_time (TimeStep).
-  long time   = System.nanoTime();
-  delta_time  = ((int) ((time - last_time) / 1000000))/10;
-  last_time   = time;
-
   background(200);
   catapult.update(balls);
   balls.update();
@@ -37,7 +32,8 @@ void draw() {
   walls.show();
 }
 
-void mousePressed(){
+
+void mousePressed() {
   walls.mousePressedEvent(new PVector(mouseX, mouseY));
 }
 

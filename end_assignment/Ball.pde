@@ -1,6 +1,3 @@
-long last_time;
-int delta_time;
-
 class Ball {
 
   PVector position  = new PVector();
@@ -9,7 +6,7 @@ class Ball {
   float   size, mass, c, spring;
   boolean release   = false;
   boolean collision = false;
-  
+
   // Declare constant
   float   gConst    = 0.001;
   float   bodyMass  = 1000000;
@@ -32,8 +29,8 @@ class Ball {
     fill(150);
     ellipse(position.x, position.y, size, size);
   }
-  
-  
+
+
   void shoot(PVector force) {
     speed.x = (force.x*(100+c)/100)*delta_time;
     speed.y = (force.y*(100+c)/100)*delta_time;

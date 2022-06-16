@@ -1,14 +1,14 @@
-class Ground{
-  
-  
-  Ground(){
+class Ground {
+
+
+  Ground() {
   }
-  
-  
-  void update(Balls balls){
+
+
+  void update(Balls balls) {
   }
-  
-  
-  void show(){
+
+
+  void show() {
   }
 }

@@ -1,8 +1,8 @@
 class Obstacle {
 
   PVector position;
-  float width_, height_;
-  color color_;
+  float   width_, height_;
+  color   color_;
 
 
   Obstacle(PVector mouse) {
@@ -17,13 +17,17 @@ class Obstacle {
     for (Ball ball : other.balls) {
       if (ball != null) {
         if (isCollision(ball)) {
-          if (ball.speed.mag() >= 50) {
-          ball.collision = true;
+          if (ball.speed.mag() >= 10) {
+            ball.collision = true;
           } else {
-          reflect(ball);
+            reflect(ball);
           }
         }
       }
+    }
+    
+    for (Particle particle : other.particles){
+      reflect(particle);
     }
   }
 
@@ -37,7 +41,7 @@ class Obstacle {
   void reflect(Ball ball) {
     /*
       Reflect the ball when it hitting with the obstacle
-    */
+     */
 
     // Right and left from the obstacle
     if (ball.position.x + ball.size >= position.x - width_
@@ -47,7 +51,7 @@ class Obstacle {
       ball.speed.x   *= -1;
       //ball.speed.x    = (ball.speed.x*(60+ball.c))/100;
     }
-    
+
     if (ball.position.x - ball.size <= position.x + width_
       && ball.position.x > position.x + width_)
     {
@@ -65,7 +69,7 @@ class Obstacle {
       //ball.speed.y    = (ball.speed.y*(80+ball.c))/100;
       ball.speed.x    = (ball.speed.x*(80+ball.c))/100;
     }
-    
+
     if (ball.position.y + ball.size >= position.y - height_
       && ball.position.y < position.y - height_)
     {
@@ -73,6 +77,44 @@ class Obstacle {
       ball.speed.y   *= -1;
       //ball.speed.y    = (ball.speed.y*(60+ball.c))/100;
       //ball.speed.x    = (ball.speed.x*(90+ball.c))/100;
+    }
+  }
+  
+  
+  void reflect(Particle ball) {
+    /*
+      Reflect the ball when it hitting with the obstacle
+     */
+
+    // Right and left from the obstacle
+    if (ball.position.x + ball.size >= position.x - width_
+      && ball.position.x < position.x - width_)
+    {
+      ball.position.x = position.x - width_ - ball.size;
+      ball.velocity.x   *= -1;
+    }
+
+    if (ball.position.x - ball.size <= position.x + width_
+      && ball.position.x > position.x + width_)
+    {
+      ball.position.x = position.x + width_ + ball.size;
+      ball.velocity.x   *= -1;
+    }
+
+    // Under and above from the obstacle
+    if (ball.position.y - ball.size <= position.y + height_
+      && ball.position.y > position.y + height_)
+    {
+      ball.position.y = position.y + height_ + ball.size;
+      ball.velocity.y   *= -1;
+      ball.velocity.x    = ball.velocity.x*0.6;
+    }
+
+    if (ball.position.y + ball.size >= position.y - height_
+      && ball.position.y < position.y - height_)
+    {
+      ball.position.y = position.y - height_ - ball.size;
+      ball.velocity.y   *= -1;
     }
   }
 
