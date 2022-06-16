@@ -7,7 +7,7 @@ class ParticleSystem{
   
   
   ParticleSystem(){
-    particles  = new ArrayList<Particle>();
+    particles = new ArrayList<Particle>();
     origin    = new PVector();
   }
   
