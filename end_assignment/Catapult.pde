@@ -55,7 +55,7 @@ class Catapult {
 
 
   void drawString() {
-    fill(0);
+    fill(255);
     beginShape();
     vertex(spawPos.x-10, spawPos.y);
     vertex(balls.getPositionX()-balls.getSize(), balls.getPositionY());

@@ -14,27 +14,11 @@ class Balls {
   }
 
 
-  void show() {
-    for (Ball ball : balls) {
-      ball.show();
-    }
-
-    for (Particle particle : particles) {
-      particle.show();
-    }
-  }
-
-
-  void shoot(PVector force) {
-    balls.get(balls.size()-1).shoot(force);
-  }
-
-
   void update() {
 
     // Calculate delta_time (TimeStep).
     long time   = System.nanoTime();
-    delta_time  = ((int) ((time - last_time) / 1000000))/10;
+    delta_time  = int((time - last_time) / 1000000)/10;
     last_time   = time;
 
     // Collision detection
@@ -59,16 +43,38 @@ class Balls {
     for (int i = balls.size()-1; i>=0; i--) {
       balls.get(i).update();
       if (balls.get(i).collision) {
-        particles.add(new Particle(balls.get(i).position));
+        for (int j = int(balls.get(i).size); j>=0; j--) {
+          PVector position = new PVector(
+            random(-balls.get(i).size + balls.get(i).position.x, balls.get(i).size + balls.get(i).position.x),
+            random(-balls.get(i).size + balls.get(i).position.y, balls.get(i).size + balls.get(i).position.y)
+            );
+          particles.add(new Particle(position));
+        }
         balls.remove(i);
       }
     }
   }
 
 
+  void show() {
+    for (Ball ball : balls) {
+      ball.show();
+    }
+
+    for (Particle particle : particles) {
+      particle.show();
+    }
+  }
+
+
+  void shoot(PVector force) {
+    balls.get(balls.size()-1).shoot(force);
+  }
+
+
   void collideBall(Ball ball, ArrayList<Ball> others) {
     /*
-      Bouncing with each other;
+      Bouncing ball with other ball;
      */
 
     for (Ball other : others) {
@@ -85,16 +91,16 @@ class Balls {
         float ax = (targetX - other.position.x) * (pow(ball.spring, 2)+pow(other.spring, 2));
         float ay = (targetY - other.position.y) * (pow(ball.spring, 2)+pow(other.spring, 2));
 
-        ball.speed.sub(ax, ay);
-        other.speed.add(ax, ay);
+        ball.velocity.sub(ax, ay);
+        other.velocity.add(ax, ay);
       }
     }
   }
-  
-  
+
+
   void collideParticle(Ball ball, ArrayList<Particle> others) {
     /*
-      Bouncing with each other;
+      Bouncing ball with other particle;
      */
 
     for (Particle other : others) {
@@ -111,16 +117,16 @@ class Balls {
         float ax = (targetX - other.position.x) * (pow(ball.spring, 2)+pow(0.05, 2));
         float ay = (targetY - other.position.y) * (pow(ball.spring, 2)+pow(0.05, 2));
 
-        ball.speed.sub(ax, ay);
+        ball.velocity.sub(ax, ay);
         other.velocity.add(ax, ay);
       }
     }
   }
-  
-  
+
+
   void particleCollide(Particle particle, ArrayList<Particle> others) {
     /*
-      Bouncing with each other;
+      Bouncing particle with other particle;
      */
 
     for (Particle other : others) {

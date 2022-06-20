@@ -10,37 +10,40 @@ class Particle {
 
   Particle(PVector origin) {
     position      = new PVector(origin.x, origin.y - 45);
-    velocity      = new PVector(random(-2, 2), random(-1, -2));
+    velocity      = new PVector(random(-2, 2), random(-2, -2));
     acceleration  = new PVector(0, 0.1);
 
-    size          = 4;
+    size          = 5;
     lifetime      = 255;
   }
 
 
   void update() {
-    velocity.add(acceleration);
+    acceleration.y = 0.1;
+    velocity.add(acceleration.mult(delta_time));
     position.add(velocity);
-    lifetime -= 1;
 
     // Bounce the particle when hitting ground or wall;
     if (position.y + size >= height) {
-      position.y = height - size;
-      velocity.y   *= -1;
-      velocity.y    = velocity.y*0.6;
-      velocity.x    = velocity.x*0.6;
+      position.y   = height - size;
+      velocity.y  *= -1;
+      velocity.y   = velocity.y*0.6;
+      velocity.x   = velocity.x*0.6;
+      lifetime    -= 1;
     }
     if (position.x + size >= width) {
-      position.x = width - size;
-      velocity.x   *= -1;
-      velocity.x    = velocity.x*0.6;
-      velocity.y    = velocity.y*0.6;
+      position.x  = width - size;
+      velocity.x *= -1;
+      velocity.x  = velocity.x*0.6;
+      velocity.y  = velocity.y*0.6;
+      lifetime   -= 1;
     }
     if (position.x - size <= 0) {
-      position.x = size;
-      velocity.x   *= -1;
-      velocity.x    = velocity.x*0.6;
-      velocity.y    = velocity.y*0.6;
+      position.x  = size;
+      velocity.x *= -1;
+      velocity.x  = velocity.x*0.6;
+      velocity.y  = velocity.y*0.6;
+      lifetime   -= 1;
     }
   }
 
@@ -50,7 +53,7 @@ class Particle {
     translate(position.x, position.y);
     fill(lifetime, lifetime, 0);
     rotate(frameCount / -100.0);
-    ellipse(0, 0, 4, 4);
+    ellipse(0, 0, size, size);
     popMatrix();
   }
 

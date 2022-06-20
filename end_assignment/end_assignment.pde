@@ -8,7 +8,7 @@ Catapult catapult;
 
 
 void setup() {
-  size(700, 700);
+  fullScreen();
   noStroke();
   ellipseMode(RADIUS);
   rectMode   (RADIUS);
@@ -21,7 +21,7 @@ void setup() {
 
 
 void draw() {
-  background(200);
+  background(0);
   catapult.update(balls);
   balls.update();
   ground.update(balls);
