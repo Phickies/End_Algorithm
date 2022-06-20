@@ -21,6 +21,7 @@ class Walls {
     }
   }
 
+
   void mousePressedEvent(PVector mouse) {
     if (mouse.x >= (width/3)) {
       Obstacle newCandidate = new Obstacle(new PVector(mouse.x, mouse.y));
