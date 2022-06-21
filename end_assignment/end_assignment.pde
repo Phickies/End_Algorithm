@@ -8,7 +8,7 @@ Catapult catapult;
 
 
 void setup() {
-  fullScreen();
+  size(700,700);
   noStroke();
   ellipseMode(RADIUS);
   rectMode   (RADIUS);
@@ -16,13 +16,13 @@ void setup() {
   ground      = new Ground();
   walls       = new Walls();
   balls       = new Balls();
-  catapult    = new Catapult(new PVector(150, height-250));
+  catapult    = new Catapult(new PVector(150, height-250), balls);
 }
 
 
 void draw() {
   background(0);
-  catapult.update(balls);
+  catapult.update();
   balls.update();
   ground.update(balls);
   walls.update(balls);
@@ -39,10 +39,10 @@ void mousePressed() {
 
 
 void mouseDragged() {
-  catapult.mouseDraggedEvent(new PVector(mouseX, mouseY), balls);
+  catapult.mouseDraggedEvent(new PVector(mouseX, mouseY));
 }
 
 
 void mouseReleased() {
-  catapult.mouseReleasedEvent(new PVector(mouseX, mouseY), balls);
+  catapult.mouseReleasedEvent(new PVector(mouseX, mouseY));
 }

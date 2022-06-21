@@ -6,8 +6,6 @@ class Balls {
   ArrayList<Ball> balls;
   ArrayList<Particle> particles;
 
-  int generated;
-
   Balls() {
     balls     = new ArrayList<Ball>();
     particles = new ArrayList<Particle>();
@@ -39,9 +37,13 @@ class Balls {
       }
     }
 
+    for (Ball ball : balls) {
+      ball.update();
+      ball.checkEdges();
+    }
+
     // Movement and update spawn particle
     for (int i = balls.size()-1; i>=0; i--) {
-      balls.get(i).update();
       if (balls.get(i).collision) {
         for (int j = int(balls.get(i).size); j>=0; j--) {
           PVector position = new PVector(
@@ -64,11 +66,6 @@ class Balls {
     for (Particle particle : particles) {
       particle.show();
     }
-  }
-
-
-  void shoot(PVector force) {
-    balls.get(balls.size()-1).shoot(force);
   }
 
 
@@ -168,36 +165,5 @@ class Balls {
     if (addThisBall) {
       balls.add(newCandidate);
     }
-  }
-
-
-  void setRelease(boolean isRelease) {
-    if (balls.size() != 0) {
-      balls.get(balls.size()-1).setRelease(isRelease);
-    }
-  }
-
-
-  boolean getRelease() {
-    if (balls.size() == 0) {
-      return true;
-    } else {
-      return balls.get(balls.size()-1).getRelease();
-    }
-  }
-
-
-  float getPositionX() {
-    return balls.get(balls.size()-1).getPositionX();
-  }
-
-
-  float getPositionY() {
-    return balls.get(balls.size()-1).getPositionY();
-  }
-
-
-  float getSize() {
-    return balls.get(balls.size()-1).getSize();
   }
 }
