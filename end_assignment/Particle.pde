@@ -52,7 +52,7 @@ class Particle {
     pushMatrix();
     translate(position.x, position.y);
     fill(lifetime, lifetime, 0);
-    circle(0, 0, size);
+    ellipse(0, 0, size, size);
     popMatrix();
   }
 
