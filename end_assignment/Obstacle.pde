@@ -59,7 +59,6 @@ class Obstacle {
     {
       ball.position.x = position.x + width_ + ball.size;
       ball.velocity.x   *= -1;
-      //ball.velocity.x    = (ball.velocity.x*(60+ball.c))/100;
     }
 
     // Under and above from the obstacle
@@ -68,15 +67,11 @@ class Obstacle {
     {
       ball.position.y = position.y + height_ + ball.size;
       ball.velocity.y   *= -1;
-      //ball.velocity.y    = (ball.velocity.y*(80+ball.c))/100;
-      ball.velocity.x    = (ball.velocity.x*(80+ball.c))/100;
     } else if (ball.position.y + ball.size >= position.y - height_
       && ball.position.y < position.y - height_)
     {
       ball.position.y = position.y - height_ - ball.size;
       ball.velocity.y   *= -1;
-      //ball.velocity.y    = (ball.velocity.y*(60+ball.c))/100;
-      //ball.velocity.x    = (ball.velocity.x*(90+ball.c))/100;
     }
   }
 

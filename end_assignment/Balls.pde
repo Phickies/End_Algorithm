@@ -21,25 +21,12 @@ class Balls {
 
     // Collision detection
     for (Ball ball : balls) {
+      PVector gravity = new PVector(0, ball.mass*0.15);
+      ball.update();
+      ball.applyForce(gravity);
+      ball.checkEdges();
       collideBall(ball, balls);
       collideParticle(ball, particles);
-    }
-
-    for (Particle particle : particles) {
-      particleCollide(particle, particles);
-    }
-
-    // Update velocity for each particle and delete old particle
-    for (int i = particles.size() - 1; i >= 0; i--) {
-      particles.get(i).update();
-      if (particles.get(i).isDead()) {
-        particles.remove(i);
-      }
-    }
-
-    for (Ball ball : balls) {
-      ball.update();
-      ball.checkEdges();
     }
 
     // Movement and update spawn particle
@@ -53,6 +40,21 @@ class Balls {
           particles.add(new Particle(position));
         }
         balls.remove(i);
+      }
+    }
+
+    for (Particle particle : particles) {
+      PVector gravity = new PVector(0, particle.mass*0.15);
+      particle.checkEdge();
+      particle.update();
+      particle.applyForce(gravity);
+      particleCollide(particle, particles);
+    }
+
+    // Update velocity for each particle and delete old particle
+    for (int i = particles.size() - 1; i >= 0; i--) {
+      if (particles.get(i).isDead()) {
+        particles.remove(i);
       }
     }
   }
@@ -152,7 +154,7 @@ class Balls {
       A new ball is only created here!
      */
 
-    Ball newCandidate = new Ball(mouse.x, mouse.y);
+    Ball newCandidate = new Ball(mouse);
 
     boolean addThisBall = true;
 

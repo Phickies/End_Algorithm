@@ -4,56 +4,59 @@ class Particle {
   PVector velocity;
   PVector acceleration;
 
-  float   size;
-  float   lifetime;
+  float   mass, size, lifetime;
 
 
   Particle(PVector origin) {
-    position      = new PVector(origin.x, origin.y - 45);
-    velocity      = new PVector(random(-2, 2), random(-2, -2));
-    acceleration  = new PVector(0, 0.1);
+    position      = new PVector(origin.x, origin.y);
+    velocity      = new PVector(random(-2, 2), random(-2, 2));
+    acceleration  = new PVector();
 
-    size          = 5;
-    lifetime      = 255;
+    mass     = 1;
+    size     = 5;
+    lifetime = 255;
   }
 
 
   void update() {
-    acceleration.y = 0.1;
-    velocity.add(acceleration.mult(delta_time));
+    velocity.add(acceleration);
     position.add(velocity);
-
-    // Bounce the particle when hitting ground or wall;
-    if (position.y + size >= height) {
-      position.y   = height - size;
-      velocity.y  *= -1;
-      velocity.y   = velocity.y*0.6;
-      velocity.x   = velocity.x*0.6;
-      lifetime    -= 1;
-    }
-    if (position.x + size >= width) {
-      position.x  = width - size;
-      velocity.x *= -1;
-      velocity.x  = velocity.x*0.6;
-      velocity.y  = velocity.y*0.6;
-      lifetime   -= 1;
-    }
-    if (position.x - size <= 0) {
-      position.x  = size;
-      velocity.x *= -1;
-      velocity.x  = velocity.x*0.6;
-      velocity.y  = velocity.y*0.6;
-      lifetime   -= 1;
-    }
+    acceleration.mult(0);
   }
 
 
   void show() {
-    pushMatrix();
-    translate(position.x, position.y);
     fill(lifetime, lifetime, 0);
-    ellipse(0, 0, size, size);
-    popMatrix();
+    ellipse(position.x, position.y, size, size);
+  }
+
+
+  void applyForce(PVector force) {
+    PVector f = PVector.div(force, mass);
+    acceleration.add(f);
+    acceleration.mult(delta_time);
+  }
+
+
+  void checkEdge() {
+    if (position.y + size >= height) {
+      position.y   = height - size;
+      velocity.y  *= -0.6;
+      velocity.x  *= 0.6;
+      lifetime    -= 1;
+    }
+    if (position.x + size >= width) {
+      position.x  = width - size;
+      velocity.x *= -0.6;
+      velocity.y *= 0.6;
+      lifetime   -= 1;
+    }
+    if (position.x - size <= 0) {
+      position.x  = size;
+      velocity.x *= -0.6;
+      velocity.y *= 0.6;
+      lifetime   -= 1;
+    }
   }
 
 

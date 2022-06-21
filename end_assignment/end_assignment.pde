@@ -14,7 +14,7 @@ void setup() {
   rectMode   (RADIUS);
   last_time   = System.nanoTime();
   ground      = new Ground();
-  walls       = new Walls();
+  walls       = new Walls(width/3, width);
   balls       = new Balls();
   catapult    = new Catapult(new PVector(150, height-250), balls);
 }

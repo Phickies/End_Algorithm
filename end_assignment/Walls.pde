@@ -1,10 +1,12 @@
 class Walls {
-
+  
   ArrayList<Obstacle> obstacles;
+  
+  PVector boundary;
 
-
-  Walls() {
+  Walls(float startX, float endX) {
     obstacles = new ArrayList<Obstacle>();
+    boundary  = new PVector(startX, endX);
   }
 
 
@@ -23,7 +25,7 @@ class Walls {
 
 
   void mousePressedEvent(PVector mouse) {
-    if (mouse.x >= (width/3)) {
+    if (mouse.x > boundary.x && mouse.x < boundary.y) {
       Obstacle newCandidate = new Obstacle(new PVector(mouse.x, mouse.y));
 
       boolean addThisObstacle = true;
