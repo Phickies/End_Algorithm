@@ -8,7 +8,7 @@ Catapult catapult;
 
 
 void setup() {
-  size(700,700);
+  fullScreen();
   noStroke();
   ellipseMode(RADIUS);
   rectMode   (RADIUS);
