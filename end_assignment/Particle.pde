@@ -12,7 +12,7 @@ class Particle {
     velocity      = new PVector(random(-2, 2), random(-2, 2));
     acceleration  = new PVector();
 
-    mass     = 1;
+    mass     = 0.3;
     size     = 5;
     lifetime = 255;
   }
