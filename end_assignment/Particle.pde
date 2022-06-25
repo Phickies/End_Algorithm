@@ -4,7 +4,7 @@ class Particle {
   PVector velocity;
   PVector acceleration;
 
-  float   mass, size, lifetime;
+  float   mass, size, spring, lifetime;
 
 
   Particle(PVector origin) {
@@ -14,6 +14,7 @@ class Particle {
 
     mass     = 0.3;
     size     = 5;
+    spring   = 0.05;
     lifetime = 255;
   }
 

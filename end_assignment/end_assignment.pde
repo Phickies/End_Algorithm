@@ -1,10 +1,10 @@
 // Program for end assignment for Algorithm Course
 // Written by Tran Quy An.
 
-Ground   ground;
-Walls    walls;
-Balls    balls;
-Catapult catapult;
+Ground    ground;
+Obstacles obstacles;
+Balls     balls;
+Catapult  catapult;
 
 
 void setup() {
@@ -14,9 +14,9 @@ void setup() {
   rectMode   (RADIUS);
   last_time   = System.nanoTime();
   ground      = new Ground();
-  walls       = new Walls(width/3, width);
+  obstacles   = new Obstacles(width/3, width);
   balls       = new Balls();
-  catapult    = new Catapult(new PVector(150, height-250), balls);
+  catapult    = new Catapult(new PVector(150, height-350), balls);
 }
 
 
@@ -25,16 +25,17 @@ void draw() {
   catapult.update();
   balls.update();
   ground.update(balls);
-  walls.update(balls);
+  obstacles.update(balls);
   catapult.show();
-  balls.show();
   ground.show();
-  walls.show();
+  balls.show();
+
+  obstacles.show();
 }
 
 
 void mousePressed() {
-  walls.mousePressedEvent(new PVector(mouseX, mouseY));
+  obstacles.mousePressedEvent(new PVector(mouseX, mouseY));
 }
 
 

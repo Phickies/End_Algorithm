@@ -1,4 +1,4 @@
-class Catapult { //<>// //<>// //<>// //<>//
+class Catapult { //<>//
 
   Balls balls;
   Ball  ball;

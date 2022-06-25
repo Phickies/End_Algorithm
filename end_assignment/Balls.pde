@@ -82,16 +82,18 @@ class Balls {
       float minDist = other.size + ball.size;
 
       if (distance > 0 && distance < minDist) {
-        float angle = atan2(other.position.y - ball.position.y, other.position.x - ball.position.x);
+        float angle = atan2(other.position.y - ball.position.y,
+          other.position.x - ball.position.x);
 
         float targetX = ball.position.x + cos(angle) * minDist;
         float targetY = ball.position.y + sin(angle) * minDist;
 
-        float ax = (targetX - other.position.x) * (pow(ball.spring, 2)+pow(other.spring, 2));
-        float ay = (targetY - other.position.y) * (pow(ball.spring, 2)+pow(other.spring, 2));
+        PVector target = new PVector(targetX, targetY);
+        PVector bounce = PVector.sub(target, other.position);
+        bounce.mult(pow(ball.spring, 2)+pow(other.spring, 2));
 
-        ball.velocity.sub(ax, ay);
-        other.velocity.add(ax, ay);
+        ball.velocity.sub(bounce);
+        other.velocity.add(bounce);
       }
     }
   }
@@ -108,16 +110,18 @@ class Balls {
       float minDist = other.size + ball.size;
 
       if (distance > 0 && distance < minDist) {
-        float angle = atan2(other.position.y - ball.position.y, other.position.x - ball.position.x);
+        float angle = atan2(other.position.y - ball.position.y,
+          other.position.x - ball.position.x);
 
         float targetX = ball.position.x + cos(angle) * minDist;
         float targetY = ball.position.y + sin(angle) * minDist;
 
-        float ax = (targetX - other.position.x) * (pow(ball.spring, 2)+pow(0.05, 2));
-        float ay = (targetY - other.position.y) * (pow(ball.spring, 2)+pow(0.05, 2));
+        PVector target = new PVector(targetX, targetY);
+        PVector bounce = PVector.sub(target, other.position);
+        bounce.mult(pow(ball.spring, 2)+pow(other.spring, 2));
 
-        ball.velocity.sub(ax, ay);
-        other.velocity.add(ax, ay);
+        ball.velocity.sub(bounce);
+        other.velocity.add(bounce);
       }
     }
   }
@@ -134,16 +138,18 @@ class Balls {
       float minDist = other.size + particle.size;
 
       if (distance > 0 && distance < minDist) {
-        float angle = atan2(other.position.y - particle.position.y, other.position.x - particle.position.x);
+        float angle = atan2(other.position.y - particle.position.y,
+          other.position.x - particle.position.x);
 
         float targetX = particle.position.x + cos(angle) * minDist;
         float targetY = particle.position.y + sin(angle) * minDist;
 
-        float ax = (targetX - other.position.x) * (pow(0.05, 2)+pow(0.05, 2));
-        float ay = (targetY - other.position.y) * (pow(0.05, 2)+pow(0.05, 2));
+        PVector target = new PVector(targetX, targetY);
+        PVector bounce = PVector.sub(target, other.position);
+        bounce.mult(pow(particle.spring, 2)+pow(other.spring, 2));
 
-        particle.velocity.sub(ax, ay);
-        other.velocity.add(ax, ay);
+        particle.velocity.sub(bounce);
+        other.velocity.add(bounce);
       }
     }
   }
