@@ -9,13 +9,16 @@ class Particle {
 
   Particle(PVector origin) {
     position      = new PVector(origin.x, origin.y);
-    velocity      = new PVector(random(-2, 2), random(-2, 2));
+    velocity      = new PVector();
     acceleration  = new PVector();
 
     mass     = 0.3;
     size     = 5;
     spring   = 0.05;
     lifetime = 255;
+
+    velocity.set(random(-2, 2), random(-2, 2));
+    velocity.mult(delta_time);
   }
 
 
@@ -27,7 +30,7 @@ class Particle {
 
 
   void show() {
-    fill(lifetime, lifetime, 0);
+    fill(255, 255, 0, lifetime);
     ellipse(position.x, position.y, size, size);
   }
 

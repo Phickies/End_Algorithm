@@ -1,25 +1,29 @@
 class Catapult { //<>//
 
-  Balls balls;
-  Ball  ball;
+  Balls  balls;
+  Ball   ball;
 
   PVector position;
   PVector spawPos;
   boolean release;
 
 
-  Catapult(PVector newPos, Balls balls) {
+  Catapult(Balls balls) {
     this.balls = balls;
-    position   = new PVector(newPos.x, newPos.y);
+    position   = new PVector(200, height/2);
     spawPos    = new PVector(position.x, position.y-60);
     release    = true;
   }
 
 
-  void update() {
+  void show() {
+    // Draw the body
+    fill(#5c2414);
+    rect(position.x, position.y, 10, 60);
+    
+    // Draw string
     if (ball != null && !release && !ball.release) {
-      // Draw string
-      fill(255);
+      fill(0);
       beginShape();
       vertex(spawPos.x-10, spawPos.y);
       vertex(ball.position.x-ball.size, ball.position.y);
@@ -29,12 +33,6 @@ class Catapult { //<>//
       vertex(ball.position.x, ball.position.y-ball.size);
       endShape();
     }
-  }
-
-
-  void show() {
-    fill(#5c2414);
-    rect(position.x, position.y, 10, 60);
   }
 
 

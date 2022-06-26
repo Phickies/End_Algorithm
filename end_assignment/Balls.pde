@@ -1,7 +1,4 @@
-long last_time; //<>//
-int  delta_time;
-
-class Balls {
+class Balls { //<>//
 
   ArrayList<Ball> balls;
   ArrayList<Particle> particles;
@@ -14,24 +11,17 @@ class Balls {
 
   void update() {
 
-    // Calculate delta_time (TimeStep).
-    long time   = System.nanoTime();
-    delta_time  = int((time - last_time) / 1000000)/10;
-    last_time   = time;
-
-    // Collision detection
+    // Update physic for balls
     for (Ball ball : balls) {
-      PVector gravity = new PVector(0, ball.mass*0.15);
       ball.update();
-      ball.applyForce(gravity);
       ball.checkEdges();
-      collideBall(ball, balls);
-      collideParticle(ball, particles);
+      collideB2B(ball, balls);
+      collideB2P(ball, particles);
     }
 
-    // Movement and update spawn particle
+    // Spawn particles
     for (int i = balls.size()-1; i>=0; i--) {
-      if (balls.get(i).collision) {
+      if (balls.get(i).destroyed) {
         for (int j = int(balls.get(i).size); j>=0; j--) {
           PVector position = new PVector(
             random(-balls.get(i).size + balls.get(i).position.x, balls.get(i).size + balls.get(i).position.x),
@@ -42,19 +32,21 @@ class Balls {
         balls.remove(i);
       }
     }
+    
+    // Only exercute when have particles
+    if (particles.size() > 0) {
+      // Update physic for particles
+      for (Particle particle : particles) {
+        particle.checkEdge();
+        particle.update();
+        collideP2P(particle, particles);
+      }
 
-    for (Particle particle : particles) {
-      PVector gravity = new PVector(0, particle.mass*0.15);
-      particle.checkEdge();
-      particle.update();
-      particle.applyForce(gravity);
-      particleCollide(particle, particles);
-    }
-
-    // Update velocity for each particle and delete old particle
-    for (int i = particles.size() - 1; i >= 0; i--) {
-      if (particles.get(i).isDead()) {
-        particles.remove(i);
+      // Delete old particle
+      for (int i = particles.size() - 1; i >= 0; i--) {
+        if (particles.get(i).isDead()) {
+          particles.remove(i);
+        }
       }
     }
   }
@@ -71,7 +63,7 @@ class Balls {
   }
 
 
-  void collideBall(Ball ball, ArrayList<Ball> others) {
+  void collideB2B(Ball ball, ArrayList<Ball> others) {
     /*
       Bouncing ball with other ball;
      */
@@ -99,7 +91,7 @@ class Balls {
   }
 
 
-  void collideParticle(Ball ball, ArrayList<Particle> others) {
+  void collideB2P(Ball ball, ArrayList<Particle> others) {
     /*
       Bouncing ball with other particle;
      */
@@ -127,7 +119,7 @@ class Balls {
   }
 
 
-  void particleCollide(Particle particle, ArrayList<Particle> others) {
+  void collideP2P(Particle particle, ArrayList<Particle> others) {
     /*
       Bouncing particle with other particle;
      */

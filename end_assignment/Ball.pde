@@ -5,7 +5,7 @@ class Ball {
   PVector acceleration;
 
   float   mass, size, spring;
-  boolean release, collision;
+  boolean release, destroyed;
 
 
   Ball(PVector pos) {
@@ -17,7 +17,7 @@ class Ball {
     size         = map(mass, 1, 4, 10, 40);
     spring       = map(mass, 4, 1, 0.05, 0.9);
     release      = false;
-    collision    = false;
+    destroyed    = false;
   }
 
 
@@ -33,7 +33,7 @@ class Ball {
 
 
   void show() {
-    fill(180);
+    fill(100);
     ellipse(position.x, position.y, size, size);
   }
 

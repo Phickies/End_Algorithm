@@ -1,41 +1,42 @@
 // Program for end assignment for Algorithm Course
-// Written by Tran Quy An.
+// All documents and code are written by Tran Quy An
 
-Ground    ground;
-Obstacles obstacles;
-Balls     balls;
-Catapult  catapult;
+int  delta_time;
+
+float terrian_roughness   = 0.002;
+float gravitational_field = 0.2;
+
+Environment environment;
+Balls       balls;
+Catapult    catapult;
 
 
 void setup() {
   fullScreen();
   noStroke();
   ellipseMode(RADIUS);
-  rectMode   (RADIUS);
-  last_time   = System.nanoTime();
-  ground      = new Ground();
-  obstacles   = new Obstacles(width/3, width);
+  rectMode   (RADIUS); 
+  
+  environment = new Environment(terrian_roughness, gravitational_field);
   balls       = new Balls();
-  catapult    = new Catapult(new PVector(150, height-350), balls);
+  catapult    = new Catapult(balls);
 }
 
 
 void draw() {
-  background(0);
-  catapult.update();
+  background(113, 188, 225); 
+  
   balls.update();
-  ground.update(balls);
-  obstacles.update(balls);
-  catapult.show();
-  ground.show();
+  environment.update(balls); 
+  
   balls.show();
-
-  obstacles.show();
+  environment.show();
+  catapult.show();
 }
 
 
 void mousePressed() {
-  obstacles.mousePressedEvent(new PVector(mouseX, mouseY));
+  environment.obstacles.mousePressedEvent(new PVector(mouseX, mouseY));
 }
 
 
