@@ -27,8 +27,6 @@ class Ball {
       velocity.add(acceleration);
       position.add(velocity);
       acceleration.mult(0);
-    } else {
-      position.set(mouseX, mouseY);
     }
   }
 

@@ -4,7 +4,6 @@ class Ground {
   PVector            target;
 
   float increment;
-  float yoff;
 
 
   Ground(float rough) {
@@ -29,7 +28,7 @@ class Ground {
     fill(0, 150, 0);
 
     beginShape();
-    yoff = 0.0;
+    float yoff = 0.0;
     {
       for (int i=0; i<width; i++) {
         float y = map(noise(yoff), 0, 1, height/2, height);

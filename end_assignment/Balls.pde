@@ -157,13 +157,24 @@ class Balls { //<>//
     boolean addThisBall = true;
 
     for (int i = 0; i<balls.size(); i++) {
-      if (PVector.dist(balls.get(i).position, newCandidate.position) < (balls.get(i).size + newCandidate.size)) {
+      if (PVector.dist(balls.get(i).position, newCandidate.position)
+        < (balls.get(i).size + newCandidate.size))
+      {
         addThisBall = false;
       }
     }
 
     if (addThisBall) {
       balls.add(newCandidate);
+    }
+  }
+
+
+  void mouseDraggedEvent(PVector mouse) {
+    for (Ball ball : balls) {
+      if (!ball.release) {
+        ball.position.set(mouse);
+      }
     }
   }
 }

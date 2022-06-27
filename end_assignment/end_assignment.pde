@@ -46,6 +46,7 @@ void mousePressed() {
 
 void mouseDragged() {
   catapult.mouseDraggedEvent(new PVector(mouseX, mouseY));
+  balls.mouseDraggedEvent(new PVector(mouseX, mouseY));
 }
 
 

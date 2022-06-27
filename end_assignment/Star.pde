@@ -1,7 +1,7 @@
 class Star {
 
   PVector position;
-  float size;
+  float   size;
 
 
   Star(float meanWidth, float meanHeight, float sd) {
