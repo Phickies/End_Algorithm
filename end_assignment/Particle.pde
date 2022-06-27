@@ -12,10 +12,10 @@ class Particle {
     velocity      = new PVector();
     acceleration  = new PVector();
 
-    mass     = 0.3;
-    size     = 5;
-    spring   = 0.05;
-    lifetime = 255;
+    mass          = 0.3;
+    size          = 5;
+    spring        = 0.05;
+    lifetime      = 255;
 
     velocity = PVector.random2D();
     velocity.mult(3);

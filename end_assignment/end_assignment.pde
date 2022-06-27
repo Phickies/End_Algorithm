@@ -1,11 +1,11 @@
 // Program for end assignment for Algorithm Course
 // All documents and code are written by Tran Quy An
 
-int  delta_time;
+int   delta_time;
 
 float terrian_roughness   = 0.001;
 float gravitational_field = 0.2;
-float star_density        = width/3;
+int   star_density        = 1080;
 
 Stars       stars;
 Environment environment;

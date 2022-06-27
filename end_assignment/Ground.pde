@@ -144,12 +144,12 @@ class Ground {
         if (dist == minLength) {
 
           if (particle.velocity.x > 0.1 || particle.velocity.y > 0.2) {
-            PVector coord1 = coords.get(i).copy();
-            PVector coord2 = coords.get(i+1).copy();
+            PVector coord1    = coords.get(i).copy();
+            PVector coord2    = coords.get(i+1).copy();
 
-            PVector d      = PVector.sub(coord2, coord1);
+            PVector d         = PVector.sub(coord2, coord1);
             d.normalize();
-            PVector normal = new PVector(-d.y, d.x);
+            PVector normal    = new PVector(-d.y, d.x);
             PVector incidence = PVector.mult(particle.velocity, -1);
 
             float dot = incidence.dot(normal);

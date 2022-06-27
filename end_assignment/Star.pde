@@ -7,7 +7,7 @@ class Star {
   Star(float meanWidth, float meanHeight, float sd) {
     position = new PVector();
     position.set((randomGaussian() * sd) + meanWidth, (randomGaussian() * sd) + meanHeight);
-    size = (randomGaussian() * meanSize()) + meanSize();
+    size     = (randomGaussian() * meanSize()) + meanSize();
   }
 
 
@@ -16,7 +16,7 @@ class Star {
     pushMatrix();
     translate(position.x, position.y);
     rotate(frameCount / -100.0);
-    star(0, 0, size, size/2, 4);
+    star(0, 0, size, size/3, 4);
     popMatrix();
   }
 
