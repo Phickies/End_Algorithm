@@ -1,7 +1,7 @@
 class Walls {
-  
+
   ArrayList<Obstacle> obstacles;
-  
+
   PVector boundary;
 
   Walls(float startX, float endX) {

@@ -3,9 +3,11 @@
 
 int  delta_time;
 
-float terrian_roughness   = 0.002;
+float terrian_roughness   = 0.001;
 float gravitational_field = 0.2;
+float star_density        = width/3;
 
+Stars       stars;
 Environment environment;
 Balls       balls;
 Catapult    catapult;
@@ -15,8 +17,9 @@ void setup() {
   fullScreen();
   noStroke();
   ellipseMode(RADIUS);
-  rectMode   (RADIUS); 
-  
+  rectMode   (RADIUS);
+
+  stars       = new Stars(width/2, height/2, star_density);
   environment = new Environment(terrian_roughness, gravitational_field);
   balls       = new Balls();
   catapult    = new Catapult(balls);
@@ -24,13 +27,14 @@ void setup() {
 
 
 void draw() {
-  background(113, 188, 225); 
-  
+  background(10);
+
   balls.update();
-  environment.update(balls); 
-  
-  balls.show();
+  environment.update(balls);
+
+  stars.show();
   environment.show();
+  balls.show();
   catapult.show();
 }
 

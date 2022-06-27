@@ -26,7 +26,6 @@ class Ground {
 
 
   void show() {
-
     fill(0, 150, 0);
 
     beginShape();
@@ -51,8 +50,6 @@ class Ground {
      */
 
     float minLength = ball.size;
-    float cx        = 0.8;
-    float cy        = 0.9;
     int   start     = ceil(ball.position.x - minLength);
     int   end       = ceil(ball.position.x + minLength);
 
@@ -83,29 +80,29 @@ class Ground {
         float dist = PVector.dist(coords.get(i), ball.position);
 
         // Calculate reflecting vector
-        if (dist == minLength) {
+        if (dist == minLength && !ball.inGround) {
+          PVector coord1    = coords.get(i).copy();
+          PVector coord2    = coords.get(i+1).copy();
 
-          if (ball.velocity.x > 0.1 || ball.velocity.y > 0.2) {
+          PVector d         = PVector.sub(coord2, coord1);
+          d.normalize();
+          PVector normal    = new PVector(-d.y, d.x);
+          PVector incidence = PVector.mult(ball.velocity, -1);
 
-            ball.position  = ball.position.sub(ball.velocity);
-
-            PVector coord1 = coords.get(i).copy();
-            PVector coord2 = coords.get(i+1).copy();
-
-            PVector d      = PVector.sub(coord2, coord1);
-            d.normalize();
-            PVector normal = new PVector(-d.y, d.x);
-            PVector incidence = PVector.mult(ball.velocity, -1);
-
-            float dot = incidence.dot(normal);
-            ball.velocity.set((1+cx)*normal.x*dot - incidence.x,
-              (1+cy)*normal.y*dot - incidence.y
-              );
-          }
+          float dot         = incidence.dot(normal);
+          PVector reflect   = new PVector(2*normal.x*dot - incidence.x,
+            2*normal.y*dot - incidence.y
+            );
+          ball.velocity.set(reflect);
+          ball.inGround = true;
         }
       }
+    } else {
+      ball.inGround = false;
     }
   }
+
+
 
 
   void reflect(Particle particle) {
@@ -114,8 +111,6 @@ class Ground {
      */
 
     float minLength = particle.size;
-    float cx        = 0.8;
-    float cy        = 0.9;
     int   start     = ceil(particle.position.x - minLength);
     int   end       = ceil(particle.position.x + minLength);
 
@@ -149,9 +144,6 @@ class Ground {
         if (dist == minLength) {
 
           if (particle.velocity.x > 0.1 || particle.velocity.y > 0.2) {
-
-            particle.position  = particle.position.sub(particle.velocity);
-
             PVector coord1 = coords.get(i).copy();
             PVector coord2 = coords.get(i+1).copy();
 
@@ -161,9 +153,11 @@ class Ground {
             PVector incidence = PVector.mult(particle.velocity, -1);
 
             float dot = incidence.dot(normal);
-            particle.velocity.set((1+cx)*normal.x*dot - incidence.x,
-              (1+cy)*normal.y*dot - incidence.y
+            PVector reflect   = new PVector(2*normal.x*dot - incidence.x,
+              2*normal.y*dot - incidence.y
               );
+
+            particle.velocity.set(reflect);
             particle.lifetime--;
           }
         }

@@ -18,7 +18,7 @@ class Particle {
     lifetime = 255;
 
     velocity = PVector.random2D();
-    velocity.mult(2);
+    velocity.mult(3);
     velocity.mult(delta_time);
   }
 
@@ -31,7 +31,7 @@ class Particle {
 
 
   void show() {
-    fill(255, 255, 0, lifetime);
+    fill(230, 230, 250, lifetime);
     ellipse(position.x, position.y, size, size);
   }
 
@@ -48,19 +48,19 @@ class Particle {
       position.y   = height - size;
       velocity.y  *= -0.6;
       velocity.x  *= 0.6;
-      lifetime    -= 1;
+      lifetime--;
     }
     if (position.x + size >= width) {
       position.x  = width - size;
       velocity.x *= -0.6;
       velocity.y *= 0.6;
-      lifetime   -= 1;
+      lifetime--;
     }
     if (position.x - size <= 0) {
       position.x  = size;
       velocity.x *= -0.6;
       velocity.y *= 0.6;
-      lifetime   -= 1;
+      lifetime--;
     }
   }
 

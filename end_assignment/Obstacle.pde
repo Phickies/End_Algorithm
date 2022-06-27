@@ -24,7 +24,7 @@ class Obstacle {
         }
       }
     }
-    
+
     // Update for particle
     for (Particle particle : other.particles) {
       if (isCollide(particle)) {
@@ -51,7 +51,8 @@ class Obstacle {
     {
       ball.position.x  = position.x - width_ - ball.size;
       ball.velocity.x *= -1;
-    } if (ball.position.x - ball.size <= position.x + width_
+    }
+    if (ball.position.x - ball.size <= position.x + width_
       && ball.position.x > position.x + width_)
     {
       ball.position.x  = position.x + width_ + ball.size;
@@ -64,7 +65,8 @@ class Obstacle {
     {
       ball.position.y  = position.y + height_ + ball.size;
       ball.velocity.y *= -1;
-    } if (ball.position.y + ball.size >= position.y - height_
+    }
+    if (ball.position.y + ball.size >= position.y - height_
       && ball.position.y < position.y - height_)
     {
       ball.position.y  = position.y - height_ - ball.size;
@@ -85,7 +87,8 @@ class Obstacle {
     {
       ball.position.x   = position.x - width_ - ball.size;
       ball.velocity.x  *= -0.8;
-    } if (ball.position.x - ball.size <= position.x + width_
+    }
+    if (ball.position.x - ball.size <= position.x + width_
       && ball.position.x > position.x + width_)
     {
       ball.position.x   = position.x + width_ + ball.size;
@@ -99,7 +102,8 @@ class Obstacle {
       ball.position.y   = position.y + height_ + ball.size;
       ball.velocity.y  *= -1;
       ball.velocity.mult(0.8);
-    } if (ball.position.y + ball.size >= position.y - height_
+    }
+    if (ball.position.y + ball.size >= position.y - height_
       && ball.position.y - 10 < position.y - height_)
     {
       ball.position.y   = position.y - height_ - ball.size;

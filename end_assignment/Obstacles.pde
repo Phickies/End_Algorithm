@@ -1,7 +1,7 @@
 class Obstacles {
-  
+
   ArrayList<Obstacle> obstacles;
-  
+
   PVector boundary;
 
   Obstacles(float startX, float endX) {
@@ -25,6 +25,10 @@ class Obstacles {
 
 
   void mousePressedEvent(PVector mouse) {
+    /*
+     Spawn new obstacle
+     */
+
     if (mouse.x > boundary.x && mouse.x < boundary.y) {
       Obstacle newCandidate = new Obstacle(new PVector(mouse.x, mouse.y));
 

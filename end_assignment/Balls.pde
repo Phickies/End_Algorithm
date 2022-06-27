@@ -32,7 +32,7 @@ class Balls { //<>//
         balls.remove(i);
       }
     }
-    
+
     // Only exercute when have particles
     if (particles.size() > 0) {
       // Update physic for particles

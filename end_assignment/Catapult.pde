@@ -20,10 +20,10 @@ class Catapult { //<>//
     // Draw the body
     fill(#5c2414);
     rect(position.x, position.y, 10, 60);
-    
+
     // Draw string
     if (ball != null && !release && !ball.release) {
-      fill(0);
+      fill(100);
       beginShape();
       vertex(spawPos.x-10, spawPos.y);
       vertex(ball.position.x-ball.size, ball.position.y);

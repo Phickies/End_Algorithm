@@ -5,7 +5,7 @@ class Ball {
   PVector acceleration;
 
   float   mass, size, spring;
-  boolean release, destroyed;
+  boolean release, destroyed, inGround;
 
 
   Ball(PVector pos) {
@@ -18,6 +18,7 @@ class Ball {
     spring       = map(mass, 4, 1, 0.05, 0.9);
     release      = false;
     destroyed    = false;
+    inGround     = false;
   }
 
 
@@ -33,7 +34,7 @@ class Ball {
 
 
   void show() {
-    fill(100);
+    fill(200);
     ellipse(position.x, position.y, size, size);
   }
 
@@ -58,21 +59,16 @@ class Ball {
     float c = map(mass, 1, 4, 0.8, 0.6);
 
     if (position.y + size >= height) {
-      position.y  = height - size;
-      velocity.y *= -1;
-      velocity.y *= c;
-      velocity.x *= c;
+      destroyed   = true;
     }
     if (position.x + size >= width) {
       position.x  = width - size;
-      velocity.x *= -1;
-      velocity.x *= c;
+      velocity.x *= -c;
       velocity.y *= c;
     }
     if (position.x - size <= 0) {
       position.x  = size;
-      velocity.x *= -1;
-      velocity.x *= c;
+      velocity.x *= -c;
       velocity.y *= c;
     }
   }
