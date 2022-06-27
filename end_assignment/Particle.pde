@@ -17,7 +17,8 @@ class Particle {
     spring   = 0.05;
     lifetime = 255;
 
-    velocity.set(random(-2, 2), random(-2, 2));
+    velocity = PVector.random2D();
+    velocity.mult(2);
     velocity.mult(delta_time);
   }
 
